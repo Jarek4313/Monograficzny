@@ -1,0 +1,67 @@
+const categoryTools = { 
+    key: 'key', 
+    screwdriver: 'screwdriver',
+    drill: 'drill'
+  }
+  const stuffs = [
+    {
+      id: 0,
+      category: categoryTools.key,
+      name: "Klucz 16",    
+      price: 11.33,
+      active: true
+    },
+    {
+      id: 1,
+      category: categoryTools.key,
+      name: "Klucz 23",
+      price: 19.33,
+      active: false
+    },
+    {
+      id: 2,
+      category: categoryTools.key,
+      name: "Klucz 13",
+      price: 9.23,
+      active: true
+    },
+    {
+      id: 3, 
+      name: "Wiertło 5",
+      category: categoryTools.drill,
+      price: 5,
+      active: true
+    },
+    {
+      id: 4,
+      name: "Wiertło 7",
+      category: categoryTools.drill,
+      price: 6,
+      active: true
+    },
+    {
+      id: 5,
+      name: "Wiertło 9",
+      category: categoryTools.drill,
+      price: 7,
+      active: true
+    }
+  ]
+const isBelowPrice = stuff => stuff.price < 12
+const isCategory = stuff => stuff.category === categoryTools.key
+const priceMod = stuff =>  {
+  return {
+    price: stuff.price + stuff.price*0.23,
+    ...stuff
+  }
+}
+
+const matchStuff = stuffs.filter(isCategory).filter(isBelowPrice)
+const result = matchStuff.map(priceMod)
+console.log(result)
+
+const priceReducer = (acc , curr ) => {
+  return {price: acc.price + curr.price}
+}
+const priceAll = result.reduce(priceReducer)
+console.log(`Sumaryczna cena: ${priceAll.price}`)
